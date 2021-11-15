@@ -1,0 +1,33 @@
+{
+  "name": "enkor-bnb",
+  "version": "1.0.0",
+  "description": "- main 브랜치에 PR 해주세요.",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js",
+    "start:dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annahxxl/enkor-bnb.git"
+  },
+  "author": "Hanna Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annahxxl/enkor-bnb/issues"
+  },
+  "homepage": "https://github.com/annahxxl/enkor-bnb#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^4.6.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
