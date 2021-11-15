@@ -3,8 +3,9 @@ import "express-async-errors";
 import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
-import { config } from "./config.js";
+import config from "./config.js";
 import api from "./router/api.js";
+import sequelize from "./model/db.js";
 
 const app = express();
 
@@ -26,7 +27,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = config.host.port;
-app.listen(PORT, () => {
-  console.log(`Express server is listening on ${PORT} port.`);
+// DB 연결
+sequelize.sync().then(() => {
+  // 서버 실행
+  const PORT = config.host.port;
+  app.listen(PORT, () => {
+    console.log(`Express server is listening on ${PORT} port.`);
+  });
 });
