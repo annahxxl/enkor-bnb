@@ -18,27 +18,27 @@ export const House = sequelize.define(
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: true,
+      allowNull: false,
     },
     address: {
       type: DataTypes.STRING(128),
-      allowNull: true,
+      allowNull: false,
     },
     university: {
       type: DataTypes.STRING(45),
-      allowNull: true,
+      allowNull: false,
     },
     houseType: {
       type: DataTypes.STRING(45),
-      allowNull: true,
+      allowNull: false,
     },
     pricePerDay: {
       type: DataTypes.INTEGER(11),
-      allowNull: true,
+      allowNull: false,
     },
     images: {
       type: DataTypes.JSON,
-      allowNull: true,
+      allowNull: false,
     },
   },
   {
@@ -46,6 +46,10 @@ export const House = sequelize.define(
   }
 );
 
-export async function findAllHouse() {}
+export async function findAllHouse() {
+  return House.findAll();
+}
 
-export async function findHouse(houseId) {}
+export async function findHouseById(id) {
+  return House.findByPk(id);
+}
