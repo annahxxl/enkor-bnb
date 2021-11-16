@@ -2,13 +2,15 @@ import * as reservationsRepository from "../model/reservations.js";
 import * as housesRepository from "../model/houses.js";
 
 export async function addReservation(req, res, next) {
-  const { userId } = req;
-  const houseId = parseInt(req.query.houseId);
+  const {
+    userId,
+    query: { houseId },
+  } = req;
   const house = await housesRepository.findById(houseId);
-  if (!house) {
-    return res.status(404).json({
+  if (!houseId || !house) {
+    return res.status(400).json({
       success: false,
-      message: "존재하지 않는 매물입니다.",
+      message: "잘못된 요청입니다.",
     });
   }
   const reservation = await reservationsRepository.create({

@@ -38,33 +38,46 @@ export const Reservation = sequelize.define(
 Reservation.belongsTo(User);
 Reservation.belongsTo(House);
 
+const RESERVATION_OPTIONS = {
+  attributes: [
+    "id",
+    "userId",
+    [Sequelize.col("user.email"), "userEmail"],
+    "houseId",
+    [Sequelize.col("house.name"), "houseName"],
+    [Sequelize.col("house.address"), "houseAddress"],
+    "createdAt",
+    "updatedAt",
+  ],
+  include: [
+    {
+      model: User,
+      attributes: [],
+    },
+    {
+      model: House,
+      attributes: [],
+    },
+  ],
+};
+
 export async function create(reservation) {
-  return Reservation.create(reservation).then((data) => data.dataValues);
+  // return Reservation.create(reservation).then((data) =>
+  //   Reservation.findByPk(data.dataValues.id, { ...RESERVATION_OPTIONS }).then(
+  //     (data) => data.dataValues
+  //   )
+  // );
+  const created = await Reservation.create(reservation);
+  const createdReservation = await Reservation.findByPk(created.id, {
+    ...RESERVATION_OPTIONS,
+  });
+  return createdReservation;
 }
 
 export async function findAllByUserId(userId) {
   return Reservation.findAll({
-    attributes: [
-      "id",
-      "userId",
-      [Sequelize.col("user.email"), "userEmail"],
-      "houseId",
-      [Sequelize.col("house.name"), "houseName"],
-      [Sequelize.col("house.address"), "houseAddress"],
-      "createdAt",
-      "updatedAt",
-    ],
     where: { userId },
-    include: [
-      {
-        model: User,
-        attributes: [],
-      },
-      {
-        model: House,
-        attributes: [],
-      },
-    ],
     order: [["createdAt", "DESC"]],
+    ...RESERVATION_OPTIONS,
   });
 }
