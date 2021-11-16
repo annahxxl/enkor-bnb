@@ -5,7 +5,7 @@ import cors from "cors";
 import morgan from "morgan";
 import config from "./config.js";
 import api from "./router/api.js";
-import sequelize from "./model/db.js";
+import sequelize from "./db.js";
 
 const app = express();
 
@@ -29,9 +29,10 @@ app.use((err, req, res, next) => {
 
 // DB 연결
 sequelize.sync().then(() => {
+  console.log("✅ DB connection was successful.");
   // 서버 실행
   const PORT = config.host.port;
   app.listen(PORT, () => {
-    console.log(`Express server is listening on ${PORT} port.`);
+    console.log(`✅ Server is listening on port ${PORT}.`);
   });
 });
