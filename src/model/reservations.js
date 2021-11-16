@@ -2,6 +2,7 @@ import sequelizeModule from "sequelize";
 import sequelize from "../db.js";
 import { House } from "./houses.js";
 import { User } from "./users.js";
+import { Sequelize } from "sequelize";
 
 const DataTypes = sequelizeModule.DataTypes;
 
@@ -34,7 +35,36 @@ export const Reservation = sequelize.define(
     paranoid: true,
   }
 );
+Reservation.belongsTo(User);
+Reservation.belongsTo(House);
 
-export async function createReservation(reservation) {}
+export async function createReservation(reservation) {
+  return Reservation.create(reservation).then((data) => data.dataValues);
+}
 
-export async function findAllReservation(userId) {}
+export async function findAllReservationByUserId(userId) {
+  return Reservation.findAll({
+    attributes: [
+      "id",
+      "userId",
+      [Sequelize.col("user.email"), "userEmail"],
+      "houseId",
+      [Sequelize.col("house.name"), "houseName"],
+      [Sequelize.col("house.address"), "houseAddress"],
+      "createdAt",
+      "updatedAt",
+    ],
+    where: { userId },
+    include: [
+      {
+        model: User,
+        attributes: [],
+      },
+      {
+        model: House,
+        attributes: [],
+      },
+    ],
+    order: [["createdAt", "DESC"]],
+  });
+}
