@@ -38,3 +38,7 @@ export async function createUser(user) {
 export function findUserByEmail(email) {
   return User.findOne({ where: { email } });
 }
+
+export function findUserById(id) {
+  return User.findByPk(id);
+}

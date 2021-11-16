@@ -23,7 +23,7 @@ const config = {
   },
   jwt: {
     secret: required("JWT_SECRET"),
-    expiresIn: required("JWT_EXPIRES_IN"),
+    expiresIn: required("JWT_EXPIRES_IN", "1d"),
   },
 };
 
