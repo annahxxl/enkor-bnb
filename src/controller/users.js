@@ -11,7 +11,7 @@ function createJwt(userId) {
 
 export async function join(req, res, next) {
   const { email, password } = req.body;
-  const foundUser = await usersRepository.findUserByEmail(email);
+  const foundUser = await usersRepository.findByEmail(email);
   if (foundUser) {
     return res.status(409).json({
       success: false,
@@ -19,7 +19,7 @@ export async function join(req, res, next) {
     });
   }
   const hashedPassword = await bcrypt.hash(password, config.bcrypt.salt);
-  await usersRepository.createUser({
+  await usersRepository.create({
     email,
     password: hashedPassword,
   });
@@ -30,7 +30,7 @@ export async function join(req, res, next) {
 
 export async function login(req, res, next) {
   const { email, password } = req.body;
-  const foundUser = await usersRepository.findUserByEmail(email);
+  const foundUser = await usersRepository.findByEmail(email);
   if (!foundUser) {
     return res.status(401).json({
       success: false,

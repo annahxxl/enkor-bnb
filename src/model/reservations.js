@@ -38,11 +38,11 @@ export const Reservation = sequelize.define(
 Reservation.belongsTo(User);
 Reservation.belongsTo(House);
 
-export async function createReservation(reservation) {
+export async function create(reservation) {
   return Reservation.create(reservation).then((data) => data.dataValues);
 }
 
-export async function findAllReservationByUserId(userId) {
+export async function findAllByUserId(userId) {
   return Reservation.findAll({
     attributes: [
       "id",

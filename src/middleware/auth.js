@@ -20,7 +20,7 @@ export const isAuth = async (req, res, next) => {
         message: "Unauthorized",
       });
     }
-    const user = await usersRepository.findUserById(decoded.userId);
+    const user = await usersRepository.findById(decoded.userId);
     if (!user) {
       return res.status(401).json({
         success: false,

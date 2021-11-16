@@ -46,10 +46,10 @@ export const House = sequelize.define(
   }
 );
 
-export async function findAllHouse() {
+export async function findAll() {
   return House.findAll();
 }
 
-export async function findHouseById(id) {
+export async function findById(id) {
   return House.findByPk(id);
 }

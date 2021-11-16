@@ -31,14 +31,14 @@ export const User = sequelize.define(
   }
 );
 
-export async function createUser(user) {
+export async function create(user) {
   return User.create(user).then((data) => data.dataValues);
 }
 
-export function findUserByEmail(email) {
+export function findByEmail(email) {
   return User.findOne({ where: { email } });
 }
 
-export function findUserById(id) {
+export function findById(id) {
   return User.findByPk(id);
 }
