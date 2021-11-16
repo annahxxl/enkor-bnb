@@ -46,8 +46,19 @@ export const House = sequelize.define(
   }
 );
 
-export async function findAll() {
-  return House.findAll();
+export async function findAll(page, pageSize, priceSort = "asc") {
+  page = parseInt(page);
+  pageSize = parseInt(pageSize);
+  if (page <= 0) {
+    page = 1;
+  }
+  const offset = (page - 1) * pageSize;
+  return House.findAll({
+    attributes: ["name", "university", "images", "houseType", "pricePerDay"],
+    limit: pageSize,
+    offset,
+    order: [["pricePerDay", priceSort]],
+  });
 }
 
 export async function findById(id) {
