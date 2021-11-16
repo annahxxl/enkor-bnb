@@ -31,6 +31,10 @@ export const User = sequelize.define(
   }
 );
 
-export async function createUser(user) {}
+export async function createUser(user) {
+  return User.create(user).then((data) => data.dataValues);
+}
 
-export async function findUserById(userId) {}
+export function findUserByEmail(email) {
+  return User.findOne({ where: { email } });
+}

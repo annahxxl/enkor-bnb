@@ -4,7 +4,7 @@ import helmet from "helmet";
 import cors from "cors";
 import morgan from "morgan";
 import config from "./config.js";
-import api from "./router/api.js";
+import apiRouter from "./router/api.js";
 import sequelize from "./db.js";
 
 const app = express();
@@ -14,7 +14,7 @@ app.use(helmet());
 app.use(cors());
 app.use(morgan("dev"));
 
-app.use("/api", api);
+app.use("/api", apiRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
