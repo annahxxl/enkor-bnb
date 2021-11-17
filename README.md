@@ -84,6 +84,18 @@ $ npm run test
 - [x] Swagger 문서화
 - [x] 유닛 테스트
 
+## API Summary
+
+| URL            | Method | Description |
+| -------------- | ------ | ----------- |
+| /api-docs | GET | API 문서 조회 |
+| /api/users/join | POST | 회원 가입 |
+| /api/users/login | POST | 로그인 |
+| /api/houses | GET | 모든 매물 조회 |
+| /api/houses/{id} | GET | 매물 상세 정보 조회 |
+| /api/reservations | POST | 숙박 예약 |
+| /api/reservations | GET | 예약 조회 |
+
 ## ERD
 
 ![ERD](https://user-images.githubusercontent.com/76666857/142267089-6d63da44-486b-4918-9484-a84be610027e.png)
