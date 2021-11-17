@@ -19,7 +19,7 @@ const config = {
     password: required("DB_PASSWORD"),
   },
   bcrypt: {
-    salt: parseInt(required("BCRYPT_SALT")),
+    salt: parseInt(required("BCRYPT_SALT"), 12),
   },
   jwt: {
     secret: required("JWT_SECRET"),
