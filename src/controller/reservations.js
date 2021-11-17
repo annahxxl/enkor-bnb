@@ -6,6 +6,12 @@ export async function addReservation(req, res, next) {
     userId,
     query: { houseId },
   } = req;
+  if (!userId) {
+    return res.status(403).json({
+      success: true,
+      message: "권한이 없습니다.",
+    });
+  }
   const house = await housesRepository.findById(houseId);
   if (!houseId || !house) {
     return res.status(400).json({
@@ -25,6 +31,12 @@ export async function addReservation(req, res, next) {
 
 export async function getAllReservation(req, res, next) {
   const { userId } = req;
+  if (!userId) {
+    return res.status(403).json({
+      success: true,
+      message: "권한이 없습니다.",
+    });
+  }
   const reservations = await reservationsRepository.findAllByUserId(userId);
   res.status(200).json({
     success: true,

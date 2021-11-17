@@ -11,6 +11,12 @@ function createJwt(userId) {
 
 export async function join(req, res, next) {
   const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({
+      success: false,
+      message: "잘못된 요청입니다.",
+    });
+  }
   const foundUser = await usersRepository.findByEmail(email);
   if (foundUser) {
     return res.status(409).json({
@@ -30,6 +36,12 @@ export async function join(req, res, next) {
 
 export async function login(req, res, next) {
   const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({
+      success: false,
+      message: "잘못된 요청입니다.",
+    });
+  }
   const foundUser = await usersRepository.findByEmail(email);
   if (!foundUser) {
     return res.status(401).json({
