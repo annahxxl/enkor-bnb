@@ -21,7 +21,10 @@ app.use("/api", apiRouter);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(openApiDocument));
 
 app.use((req, res, next) => {
-  res.sendStatus(404);
+  res.status(404).json({
+    success: false,
+    message: "Not Found",
+  });
 });
 
 app.use((err, req, res, next) => {
