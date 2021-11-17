@@ -6,8 +6,11 @@ import morgan from "morgan";
 import config from "./config.js";
 import apiRouter from "./router/api.js";
 import sequelize from "./db.js";
+import yaml from "yamljs";
+import swaggerUI from "swagger-ui-express";
 
 const app = express();
+const openApiDocument = yaml.load("src/openapi.yaml");
 
 app.use(express.json());
 app.use(helmet());
@@ -15,6 +18,7 @@ app.use(cors());
 app.use(morgan("dev"));
 
 app.use("/api", apiRouter);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(openApiDocument));
 
 app.use((req, res, next) => {
   res.sendStatus(404);
