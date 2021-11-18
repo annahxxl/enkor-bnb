@@ -98,4 +98,4 @@ $ npm run test
 
 ## ERD
 
-![ERD](https://user-images.githubusercontent.com/76666857/142267089-6d63da44-486b-4918-9484-a84be610027e.png)
+![ERD](https://user-images.githubusercontent.com/76666857/142362329-b24b99df-6d24-4057-badb-0786dd9e70e3.png)
